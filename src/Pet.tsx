@@ -1,15 +1,39 @@
-interface IPet {
+export interface IPet {
+  id: string;
   name: string;
   animal: string;
   breed: string;
+  images: any;
+  city: string;
+  state: string;
 }
 
-export default function Pet({ name, animal, breed }: IPet) {
+export default function Pet({
+  id,
+  name,
+  animal,
+  breed,
+  images,
+  city,
+  state,
+}: IPet) {
+  let hero = "http://pets-images.dev-apis.com/pets/none.jpg";
+  if (images.length) {
+    const [image] = images;
+    hero = image;
+  }
+
   return (
-    <div>
-      <h2>{name}</h2>
-      <h3>{animal}</h3>
-      <h3>{breed}</h3>
-    </div>
+    <a href={`/details/${id}`} className="pet">
+      <div className="image-container">
+        <img src={hero} alt={name} />
+      </div>
+      <div className="info">
+        <h1>{name}</h1>
+        <h2>
+          {animal} - {breed} - {city} - {state}
+        </h2>
+      </div>
+    </a>
   );
 }
